@@ -1,3 +1,8 @@
+---
+layout: post
+title: Service Discovery with OSGi
+---
+
 OSGi is (among other things) a Java dynamic service discovery tool.
 
 On the lowest level, it works like this:
