@@ -9,20 +9,21 @@ On the lowest level, it works like this:
 
 To announce a service, you register a service on the service registry:
 {% highlight java %}
-ServiceRegistration<ServiceObject> registered = bundleContext.registerService(ServiceObject.class, pool, properties);
+ServiceRegistration<ServiceObject> registered = 
+  bundleContext.registerService(ServiceObject.class, pool, properties);
 {% endhighlight %}
-```
+
 Any Java Object can be a service. The 'properties' dictionary is a map, of service properties which can be used by a service consumer to find and select services.
 
 These services can now be queried or subscribed to. I won't go into the gritty details here, but on the lowest level there is an event bus that reports all services coming and going, and on a higher level you can declaratively state that you want to bind to a service with certain properties.
 
-```
+{% highlight java %}
 @Reference(target="(test=*)")
 public void setDataSourceFactory(DataSourceFactory source) {
 	doThings(source);
 	// ... do stuff with the datasource
 }
-```
+{% endhighlight %}
 So here we express our interest in a DataSourceFactory object with tag 'test'. From the application's end, this is all we do, we rely on the OSGi and the service discovery to find us that object if it exists, or bind it on arrival if it does not. We don't care how it was found.
 
 This works pretty well from the consumers point of view, we can't make it much easier than this, but this is still pretty unwieldy from the service provider's point of view.
@@ -44,7 +45,7 @@ This standard service in OSGi introduces the notion of configuration. A service 
 
 Cutting some corners but in essence: A service can indicate that it needs configuration data and that it has a certain persistent id. When the appropriate configuration is available, the OSGi runtime will instantiate the service and associate it with that configuration.
 
-```
+{% highlight java %}
 @Component(name="docker.osgi.mysql", configurationPolicy=ConfigurationPolicy.REQUIRE, service={DataSourceFactory.class})
 public class MySQLInstance implements DataSourceFactory {
 
@@ -57,7 +58,7 @@ public class MySQLInstance implements DataSourceFactory {
 	}
 ...
 }
-```
+{% endhighlight %}
 In this piece of Java code we state that we are a component (=service) that *requires* configuration with pid "docker.osgi.mysql" and it will expose an DataSourceFactory interface to the service bus.
 
 Note that we still need a 'driver' bundle for every type of service, but it now has a much simpler responsibility: It needs to listen for configuration with the service pid's it is interested in (in this case docker.osgi.mysql) and instantiate a service that makes sense
