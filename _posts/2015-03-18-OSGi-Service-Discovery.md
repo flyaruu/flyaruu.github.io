@@ -8,20 +8,21 @@ OSGi is (among other things) a Java dynamic service discovery tool.
 On the lowest level, it works like this:
 
 To announce a service, you register a service on the service registry:
-~~~
+{% highlight java %}
 ServiceRegistration<ServiceObject> registered = bundleContext.registerService(ServiceObject.class, pool, properties);
-~~~
+{% endhighlight %}
+```
 Any Java Object can be a service. The 'properties' dictionary is a map, of service properties which can be used by a service consumer to find and select services.
 
 These services can now be queried or subscribed to. I won't go into the gritty details here, but on the lowest level there is an event bus that reports all services coming and going, and on a higher level you can declaratively state that you want to bind to a service with certain properties.
 
-~~~
+```
 @Reference(target="(test=*)")
 public void setDataSourceFactory(DataSourceFactory source) {
 	doThings(source);
 	// ... do stuff with the datasource
 }
-~~~
+```
 So here we express our interest in a DataSourceFactory object with tag 'test'. From the application's end, this is all we do, we rely on the OSGi and the service discovery to find us that object if it exists, or bind it on arrival if it does not. We don't care how it was found.
 
 This works pretty well from the consumers point of view, we can't make it much easier than this, but this is still pretty unwieldy from the service provider's point of view.
