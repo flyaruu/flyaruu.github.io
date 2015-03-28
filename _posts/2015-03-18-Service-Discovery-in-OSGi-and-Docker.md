@@ -1,3 +1,7 @@
+---
+layout: post
+title: Service Discovery
+---
 Service Discovery is an old problem, but one that has gotten much more attention recently because of the popularity of microservices.
 
 The ultimate goal is to have a mechanism where every service has a continuous and correct view of which other services are available, so it can respond accordingly. If, for example, a service you are using disappears, it probably makes sense to look for another compatible, service. If there isn't any and it is essential for your service, it might make sense to retract your own service, so other services depending on you can respond to that appropriately.
