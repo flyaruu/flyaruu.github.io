@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Service Discovery with OSGi
+permalink: /discovery/
 ---
 
 OSGi is (among other things) a Java dynamic service discovery tool.
@@ -8,6 +9,7 @@ OSGi is (among other things) a Java dynamic service discovery tool.
 On the lowest level, it works like this:
 
 To announce a service, you register a service on the service registry:
+
 {% highlight java %}
 ServiceRegistration<ServiceObject> registered = 
   bundleContext.registerService(ServiceObject.class, pool, properties);
@@ -24,6 +26,7 @@ public void setDataSourceFactory(DataSourceFactory source) {
 	// ... do stuff with the datasource
 }
 {% endhighlight %}
+
 So here we express our interest in a DataSourceFactory object with tag 'test'. From the application's end, this is all we do, we rely on the OSGi and the service discovery to find us that object if it exists, or bind it on arrival if it does not. We don't care how it was found.
 
 This works pretty well from the consumers point of view, we can't make it much easier than this, but this is still pretty unwieldy from the service provider's point of view.
@@ -59,6 +62,7 @@ public class MySQLInstance implements DataSourceFactory {
 ...
 }
 {% endhighlight %}
+
 In this piece of Java code we state that we are a component (=service) that *requires* configuration with pid "docker.osgi.mysql" and it will expose an DataSourceFactory interface to the service bus.
 
 Note that we still need a 'driver' bundle for every type of service, but it now has a much simpler responsibility: It needs to listen for configuration with the service pid's it is interested in (in this case docker.osgi.mysql) and instantiate a service that makes sense

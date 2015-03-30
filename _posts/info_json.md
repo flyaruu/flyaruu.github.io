@@ -1,4 +1,9 @@
-```
+---
+title: Docker API JSON example
+layout: page
+permalink: /info_json
+---
+{% highlight json %}
 {
   "AppArmorProfile" : "",
   "Args" : [ "mysqld" ],
@@ -107,4 +112,4 @@
     "/var/lib/mysql" : true
   }
 }
-```
+{% endhighlight %}

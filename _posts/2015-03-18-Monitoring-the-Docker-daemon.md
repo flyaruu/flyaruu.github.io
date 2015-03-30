@@ -1,6 +1,7 @@
 ---
 title: Service Discovery using the Docker API
 layout: post
+permalink: /dockerapi/
 ---
 Service Discovery using the Docker API
 
