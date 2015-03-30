@@ -3,7 +3,7 @@ title: Docker API JSON example
 layout: page
 permalink: /info_json/
 ---
-{% highlight json %}
+{% highlight javascript %}
 {
   "AppArmorProfile" : "",
   "Args" : [ "mysqld" ],
