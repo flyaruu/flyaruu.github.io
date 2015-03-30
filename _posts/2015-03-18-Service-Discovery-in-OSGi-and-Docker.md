@@ -24,8 +24,26 @@ There is something called Distributed OSGi that can be of help. This allows OSGi
 #### Micro services
 Be it as it may, more and more services are not Java based, and definitely not OSGi based, and we should consider those too. In pretty much any system you will need some kind of database, maybe a mail server, or a third party HTTP service.
 
-There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that an OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
-
 For these services it is not necessary to abstract that they are remote, as all the 'drivers' are network based to begin with, and will assume remoteness anyway. SQL databases use JDBC, mail is sent over SMTP. So in short we can integrate in a simpler way: We only need to 'discover' the configuration. We need to know to *which* JDBC url to connect, or to which SMTP server to connect, and we can leave the transport to the drivers.
 
+OSGi does not address these services at all. From an OSGi point of view, those aren't even services, so we're on our own. What we *do* have in OSGi is a pretty decent configuration manager. In a nutshell, an OSGi service can have a "persistent id", or PID. In a way you could call this the 'type' of the service. The configuration manager can associate that PID with a configuration object, which is basically a key-value map.
 
+It might be somewhat opaque if you didn't know how the OSGi configuration manager worked, but the thing to take away is that it **decouples where the source of the configuration from the consumer of the configuration**.  
+
+//TODO
+There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that an OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
+
+
+
+#### Docker
+So how does docker fit in? Docker has created a pretty insane buzz over the last year.
+(Warning, oversimplification ahead)
+
+ - It can run pretty much anything that runs in Linux
+ - It reduces a (possibly very complex) application to an image, environment parameters and exposed ports.
+ - It has a pretty sweet API
+
+There are also some things Docker explicitly *does not* do:
+ - Orchestration
+ - Service Discovery
+ 

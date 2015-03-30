@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Service Discovery with OSGi
-permalink: /discovery/
+permalink: /OSGi/
 ---
 
 OSGi is (among other things) a Java dynamic service discovery tool.
@@ -17,7 +17,7 @@ ServiceRegistration<ServiceObject> registered =
 
 Any Java Object can be a service. The 'properties' dictionary is a map, of service properties which can be used by a service consumer to find and select services.
 
-These services can now be queried or subscribed to. I won't go into the gritty details here, but on the lowest level there is an event bus that reports all services coming and going, and on a higher level you can declaratively state that you want to bind to a service with certain properties.
+These services can now be queried or subscribed to. I won't go into the gritty details here, but on the lowest level there is a repository where all services can be found, and an event bus that reports all services coming and going, and on a higher level you can declaratively state that you want to bind to a service with certain properties.
 
 {% highlight java %}
 @Reference(target="(test=*)")
@@ -29,11 +29,16 @@ public void setDataSourceFactory(DataSourceFactory source) {
 
 So here we express our interest in a DataSourceFactory object with tag 'test'. From the application's end, this is all we do, we rely on the OSGi and the service discovery to find us that object if it exists, or bind it on arrival if it does not. We don't care how it was found.
 
-This works pretty well from the consumers point of view, we can't make it much easier than this, but this is still pretty unwieldy from the service provider's point of view.
+This works pretty well for 'local' OSGi services. We can't make it much easier than this both for providers and for consumers of services. 
+
+For providers of 'remote' services like this one it is a bit more involved. As we aren't talking about an OSGi service per se, but about an OSGi service that represents a remote instance of a service. To do any meaningful service discovery we need:
+
+1. Configuration data about how to connect to our remote service
+2. A way to monitor if that service is still there
 
 Let's take a step back. In the previous page we had a mysql service with some properties:
 
- - It is running on the docker host's ip, let's say 127.0.0.1, on port 49212
+ - It is running on the host's ip, let's say 127.0.0.1, on port 49212
  - It is tagged with 'app1' and 'test'
 
 So we can now make a 'bridge' between the Docker JSON API and the OSGi service registry. We could instantiate an appropriate object (I guess a MySqlDataSourceFactory or something from the mysql Java driver) set all the right properties and we will have a working database connection.
