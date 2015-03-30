@@ -1,7 +1,7 @@
 ---
 title: Docker API JSON example
 layout: page
-permalink: /info_json
+permalink: /info_json/
 ---
 {% highlight json %}
 {
