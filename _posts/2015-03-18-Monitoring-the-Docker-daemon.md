@@ -19,7 +19,7 @@ If I inspect that container using the HTTP/JSON API it looks like [this](info_js
 
 It's quite a blob of information and I won't go into all the details, but for now these parts are interesting:
 
-{% highlight bash %}
+{% highlight yaml %}
 "Env" : [ "MYSQL_ROOT_PASSWORD=mysecretpassword",
    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
    "MYSQL_MAJOR=5.6",
@@ -28,7 +28,7 @@ It's quite a blob of information and I won't go into all the details, but for no
 {% endhighlight %}
 
 and especially:
-{% highlight bash %}
+{% highlight yaml %}
   "NetworkSettings" : {
     "Ports" : {
       "3306/tcp" : [ {
@@ -57,4 +57,4 @@ With this done we have the following data:
 
 So what we are looking for now is that another service can express interest in a service (with certain properties) and our service discovery can find an appropriate service, as well as notify when instances come and go.
 
-In [part 2](osgi) 
+In [part 2](osgi)§ 
