@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Service Discovery with OSGi
-permalink: /ServiceDiscovery
+permalink: /ServiceDiscovery.html
 ---
 
 OSGi is (among other things) a Java dynamic service discovery tool.
