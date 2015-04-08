@@ -5,9 +5,9 @@ url: "http://www.codemonkey.nl" # the base hostname & protocol for your site
 # THEME-SPECIFIC CONFIGURATION
 theme:
   # Meta
-  title: Type Theme
+  title: CodeMonkey
   avatar: avatar.png
-  gravatar: 5daed1897d57bc496eed115a3249d466 # Email MD5 hash
+  gravatar: 43a0aaa329de4c09c7c0f19d6e56ac02 # Email MD5 hash
   description: "osgi docker java" # used by search engines
 
   # Header and footer text
