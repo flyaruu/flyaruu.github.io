@@ -5,7 +5,9 @@ permalink: /dockerapi/
 ---
 Service Discovery using the Docker API
 
-This part is loosely based on Jeff Lindsay's excellent blog [here](http://progrium.com/blog/2014/09/10/automatic-docker-service-announcement-with-registrator/)
+This part is loosely based on Jeff Lindsay's blog [here](http://progrium.com/blog/2014/09/10/automatic-docker-service-announcement-with-registrator/), it's a good read and does a better job at explaining than I do.
+
+The premise is that you can query Docker hosts for their running services, and along with some meta data, expose it to a service discovery tool.
 
 On any host running Docker containers there is a Docker daemon process. This Docker daemon offers a very nice API using simple JSON HTTP calls. All docker functions are exposed through this API (starting, stopping, building, etc.) but for service discovery I'll just use it as a 'read-only' source: We'll just use it to do discover what is running. Let's look at an example.
 
@@ -58,4 +60,4 @@ With this done we have the following data:
 
 So what we are looking for now is that another service can express interest in a service (with certain properties) and our service discovery can find an appropriate service, as well as notify when instances come and go.
 
-In [part 2](osgi)§ 
+In [part 2](/OSGi/)

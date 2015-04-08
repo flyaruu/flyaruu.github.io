@@ -5,7 +5,7 @@ permalink: /discovery/
 ---
 Service Discovery is an old problem, but one that has gotten much more attention recently because of the popularity of microservices.
 
-The ultimate goal is to have a mechanism where every service has a continuous and correct view of which other services are available so it can find and consume those services, and so it can respond accordingly if there is a changes. If, for example, a service you are using disappears, it probably makes sense to look for another compatible, service. If there isn't any and it is essential for your service, it might make sense to retract your own service, so other services depending on you can respond to that appropriately. In a way this is a pro-active version of the 'circuit-breaker' pattern, as it can prevent calls to broken services.
+The ultimate goal is to have a mechanism where every service has a continuous and correct view of which other services are available so it can find and consume those services, and so it can respond accordingly if there is a change. If, for example, a service you are using disappears, it probably makes sense to look for another compatible, service. If there isn't any and it is essential for your service, it might make sense to retract your own service, so other services depending on you can respond to that appropriately. In a way this is a pro-active version of the 'circuit-breaker' pattern, as it can prevent calls to broken services.
 
 #### OSGi
 
@@ -30,6 +30,8 @@ OSGi does not address these services at all. From an OSGi point of view, those a
 
 It might be somewhat opaque if you didn't know how the OSGi configuration manager worked, but the thing to take away is that it **decouples where the source of the configuration from the consumer of the configuration**.  
 
+This seems sort of obscure, but it really is powerful. You can create reusable components that use formally defined configuration settings, and customize how the configuration is obtained depending on the situation. The configuration data might simply be a file on a workstation, but in production it might be a Zookeeper-like distributed data store.
+
 //TODO
 There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that an OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
 
@@ -41,9 +43,10 @@ So how does docker fit in? Docker has created a pretty insane buzz over the last
 
  - It can run pretty much anything that runs in Linux
  - It reduces a (possibly very complex) application to an image, environment parameters and exposed ports.
- - It has a pretty sweet API
+ - It has a pretty CLI / API
 
 There are also some things Docker explicitly *does not* do:
  - Orchestration
  - Service Discovery
  
+(/dockerapi/)[Monitoring the Docker daemon]
