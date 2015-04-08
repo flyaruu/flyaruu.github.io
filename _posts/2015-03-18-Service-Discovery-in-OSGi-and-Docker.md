@@ -49,4 +49,4 @@ There are also some things Docker explicitly *does not* do:
  - Orchestration
  - Service Discovery
  
-(/dockerapi/)[Monitoring the Docker daemon]
+[Next: Monitoring the Docker daemon](/dockerapi/)

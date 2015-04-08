@@ -83,4 +83,4 @@ Note that the bridge does not know if or when some service will accept those con
 
 Finally the bridge has the resposibility to unregister the configuration objects when the service disappears. At this point that means that the container supplying the service is stopped. The configuration admin service will then stop any services bound to that configuration object.
 
-Next: (/consul/)[Going multi host]
+Next: [Going multi host](/consul/)
