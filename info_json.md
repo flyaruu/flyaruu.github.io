@@ -2,6 +2,7 @@
 title: Docker API JSON example
 layout: page
 permalink: /info_json/
+hide: true
 ---
 {% highlight javascript %}
 {
