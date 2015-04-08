@@ -28,22 +28,20 @@ For these services it is not necessary to abstract that they are remote, as all 
 
 OSGi does not address these services at all. From an OSGi point of view, those aren't even services, so we're on our own. What we *do* have in OSGi is a pretty decent configuration manager. In a nutshell, an OSGi service can have a "persistent id", or PID. In a way you could call this the 'type' of the service. The configuration manager can associate that PID with a configuration object, which is basically a key-value map.
 
-It might be somewhat opaque if you didn't know how the OSGi configuration manager worked, but the thing to take away is that it **decouples where the source of the configuration from the consumer of the configuration**.  
+It might be somewhat opaque if you didn't know how the OSGi configuration manager worked, but the thing to take away is that it **decouples the source of the configuration from the consumer of the configuration**.  
 
 This seems sort of obscure, but it really is powerful. You can create reusable components that use formally defined configuration settings, and customize how the configuration is obtained depending on the situation. The configuration data might simply be a file on a workstation, but in production it might be a Zookeeper-like distributed data store.
 
-//TODO
-There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that an OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
-
+There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that going OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
 
 
 #### Docker
-So how does docker fit in? Docker has created a pretty insane buzz over the last year.
+So how does docker fit in? Docker has created a pretty insane buzz over the last year. I'll assume you know what it does:
 (Warning, oversimplification ahead)
 
  - It can run pretty much anything that runs in Linux
  - It reduces a (possibly very complex) application to an image, environment parameters and exposed ports.
- - It has a pretty CLI / API
+ - It has a very decent CLI / API
 
 There are also some things Docker explicitly *does not* do:
  - Orchestration

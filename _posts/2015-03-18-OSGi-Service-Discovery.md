@@ -47,11 +47,11 @@ It works, but it does create a problem: This approach requires the 'bridge' to k
 
 This is unacceptable. There is no way the bridge can know which services there can be (or will be) and how to deal with them in Java. Also there might be different ways to interact with a service. For example, if I am using an ElasticSearch indexer, I could use a specific ElasticSearch driver, but as it simply speaks HTTP, a simple HTTP connection might be easier in some cases.
 
-In sort: We will need to decouple this, and OSGi has the perfect tool for this: the Configuration Admin.
+In short: We will need to decouple this, and OSGi has the perfect tool for this: the Configuration Admin.
 
 This standard service in OSGi introduces the notion of configuration. A service (remember: Can be any Java object) can be bound to a configuration object, which is basically a persistent id (or 'pid') and a general key value map.
 
-Cutting some corners but in essence: A service can indicate that it needs configuration data and that it has a certain persistent id. When the appropriate configuration is available, the OSGi runtime will instantiate the service and associate it with that configuration.
+Cutting some corners again but in essence: A service can indicate that it needs configuration data and that it has a certain persistent id. When the appropriate configuration is available, the OSGi runtime will instantiate the service and associate it with that configuration.
 
 {% highlight java %}
 @Component(name="docker.osgi.mysql", configurationPolicy=ConfigurationPolicy.REQUIRE, service={DataSourceFactory.class})
@@ -70,7 +70,7 @@ public class MySQLInstance implements DataSourceFactory {
 
 In this piece of Java code we state that we are a component (=service) that *requires* configuration with pid "docker.osgi.mysql" and it will expose an DataSourceFactory interface to the service bus.
 
-Note that we still need a 'driver' bundle for every type of service, but it now has a much simpler responsibility: It needs to listen for configuration with the service pid's it is interested in (in this case docker.osgi.mysql) and instantiate a service that makes sense
+Note that we still need a 'driver' bundle for every type of service, but it now has a much simpler responsibility: It needs to listen for configuration with the service pid's it is interested in (in this case docker.osgi.mysql) and instantiate a service that makes sense.
 
 Note that there will be an instance for each available configuration object (there could be many configuration objects for a service. If a configuration object gets retracted, the service will be deactivated.
 
@@ -82,5 +82,6 @@ So this solves our problem: The only thing the bridge needs to do is:
 Note that the bridge does not know if or when some service will accept those configuration objects, nor does it care. The configuration object will happily float around in an unbound state until somebody is interested.
 
 Finally the bridge has the resposibility to unregister the configuration objects when the service disappears. At this point that means that the container supplying the service is stopped. The configuration admin service will then stop any services bound to that configuration object.
+
 
 Next: [Going multi host](/consul/)

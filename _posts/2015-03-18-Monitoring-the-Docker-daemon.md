@@ -18,7 +18,7 @@ docker run -e MYSQL_ROOT_PASSWORD=mysecretpassword -P mysql
 {% endhighlight %}
 The '-e' switch sets an environment variable, this particular one is required for mysql, and the '-P' switch lets docker publish this container's ports to a randomly chosen port on the host.
 
-If I inspect that container using the HTTP/JSON API it looks like [this](info_json).
+If I inspect that container using the HTTP/JSON API it looks like [this](/info_json/).
 
 It's quite a blob of information and I won't go into all the details, but for now these parts are interesting:
 
@@ -60,4 +60,4 @@ With this done we have the following data:
 
 So what we are looking for now is that another service can express interest in a service (with certain properties) and our service discovery can find an appropriate service, as well as notify when instances come and go.
 
-In [part 2](/OSGi/)
+In the [next part](/OSGi/) we will talk about how to get this information into OSGi
