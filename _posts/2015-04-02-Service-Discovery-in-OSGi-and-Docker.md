@@ -22,7 +22,10 @@ This was less of an issue in the early days (remember that the OSGi spec. is ove
 There is something called Distributed OSGi that can be of help. This allows OSGi instances to export their services to other instances so other instances can discover and consume these services transparently, in other words, the service consumer does not need to know that the service is remote. Personally I'm not convinced that this is the way to go. Granted, it is very convenient if all 'remoteness' is abstracted away, so you don't have to think about things like network transport, and if it works, well.. great, but it remains uncertain if it is generally possible and desirable to abstract this.
 
 #### Micro services
-Be it as it may, more and more services are not Java based, and definitely not OSGi based, and we should consider those too. In pretty much any system you will need some kind of database, maybe a mail server, or a third party HTTP service.
+
+There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that going OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
+
+More and more services are not Java based, and definitely not OSGi based, and we should consider those too. In pretty much any system you will need some kind of database, maybe a mail server, or a third party HTTP service.
 
 For these services it is not necessary to abstract that they are remote, as all the 'drivers' are network based to begin with, and will assume remoteness anyway. SQL databases use JDBC, mail is sent over SMTP. So in short we can integrate in a simpler way: We only need to 'discover' the configuration. We need to know to *which* JDBC url to connect, or to which SMTP server to connect, and we can leave the transport to the drivers.
 
@@ -31,8 +34,6 @@ OSGi does not address these services at all. From an OSGi point of view, those a
 It might be somewhat opaque if you didn't know how the OSGi configuration manager worked, but the thing to take away is that it **decouples the source of the configuration from the consumer of the configuration**.  
 
 This seems sort of obscure, but it really is powerful. You can create reusable components that use formally defined configuration settings, and customize how the configuration is obtained depending on the situation. The configuration data might simply be a file on a workstation, but in production it might be a Zookeeper-like distributed data store.
-
-There has been (still is, I guess) some debate about if an OSGi service is a 'micro service', I don't want to get into this, but there is no denying that going OSGi-only has a drawback that there is no free choice of technology stack: It *has* to play nice with Java, and even then some Java code is notoriously hard to get to work well in an OSGi environment.
 
 
 #### Docker
