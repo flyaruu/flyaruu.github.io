@@ -51,7 +51,11 @@ The good news is that we can easily add extra environment parameters to our call
 docker run -e MYSQL_ROOT_PASSWORD=mysecretpassword -e SERVICE_NAME=mysql -e SERVICE_TAGS=app1,test -P mysql
 {% endhighlight %}
 
-So now we have annotated this service in a very basic way: We've announced that this is indeed a mysql service, and that it is tagged with 'app1' and 'test'.
+So now we have annotated this service in a very basic way: We've announced that this is indeed a mysql service, and that it is tagged with 'app1' and 'test', by (ab)using environment variables. [^1]
+
+[^1]: From Docker 1.6.0 on, there will be 'labels', which is what we'd actually like to use here. The difference is that we only use the environment variables as service meta data, but the environment variables are (obviously) visible to the container. This is conceptually wrong, although I guess rarely an actual problem.
+
+
 
 With this done we have the following data:
  - There is a service of type 'mysql'
