@@ -75,6 +75,7 @@ Note that we still need a 'driver' bundle for every type of service, but it now 
 Note that there will be an instance for each available configuration object (there could be many configuration objects for a service. If a configuration object gets retracted, the service will be deactivated.
 
 So this solves our problem: The only thing the bridge needs to do is:
+
  - Figure out the pid to use (At this point I use "docker.osgi.<SERVICE_NAME>)
  - Extract the properties from the environment variables
  - Create a configuration object
