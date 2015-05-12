@@ -2,7 +2,6 @@
 layout: post
 title: Conclusions and Future work
 permalink: /futurework/
-published:true
 ---
 
 #### Explore other configuration sources.
